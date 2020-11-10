@@ -29,8 +29,7 @@ const EntryPage: React.FC = () => {
 
   useEffect(() => {
     const entryRef = firestore.collection("entries").doc(id);
-    entryRef.get().then((doc) => {
-      setEntry(toEntry(doc));
+    entryRef.get().then((doc) => {setEntry(toEntry(doc));
     });
   }, [id]);
 

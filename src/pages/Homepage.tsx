@@ -11,19 +11,14 @@ import {
 import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import MainFile from "../components/main/MainTimer";
+import { Entry, toEntry } from "../model";
 
 const HomePage: React.FC = () => {
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState<Entry[]>([]);
 
   useEffect(() => {
-    const entriesRef = firestore.collection("entries");
-    entriesRef.get().then((snapshot) => {
-      const entries = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setEntries(entries);
-    });
+    const entriesRef = firestore.collection('entries');
+      entriesRef.get().then(({docs}) => setEntries(docs.map(toEntry)));
   }, []);
 
   return (

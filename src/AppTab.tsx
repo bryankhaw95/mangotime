@@ -8,12 +8,13 @@ import {
   } from '@ionic/react';
   
   import React, { useState } from 'react';
-  import { ellipse, home as homeIcon, settings as settingsIcon, happyOutline } from 'ionicons/icons';
+  import { ellipse, home as homeIcon, settings as settingsIcon, happyOutline, peopleCircle } from 'ionicons/icons';
   import { BrowserRouter, Redirect, Route } from 'react-router-dom';
   
   import Homepage from './pages/Homepage';
   import SettingsPage from './pages/SettingsPage';
   import EntryPage from './pages/EntryPage';
+  import AddEntryPage from './pages/AddEntryPage';
   import DashboardPage from './pages/ProgressReport';
 
 import { useAuth } from './auth';
@@ -39,6 +40,8 @@ import ProgressReport from './pages/ProgressReport';
         </Route>
 
         <Route path="/my/entry/:id" component={EntryPage} exact={true} />
+
+        <Route path="/my/addentry/add" component={AddEntryPage} exact={true} />
 
         <Route path="/my/setting" component={SettingsPage}> 
           <SettingsPage />
@@ -69,6 +72,11 @@ import ProgressReport from './pages/ProgressReport';
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
   
+          <IonTabButton tab="tab4" href="/my/addentry/add">
+            <IonIcon icon={peopleCircle} />
+            <IonLabel>Add Entry</IonLabel>
+          </IonTabButton>
+          
           <IonTabButton tab="progressreport" href="/my/progressreport">
             <IonIcon icon={happyOutline} />
             <IonLabel>Progress Report</IonLabel>

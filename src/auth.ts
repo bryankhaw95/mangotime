@@ -23,7 +23,7 @@ export function useAuthInit(): AuthInit {
     return firebaseAuth.onAuthStateChanged((firebaseUser) => {
       const auth = firebaseUser ?
         { loggedIn: true, userId: firebaseUser.uid} :
-        { loggedIn: false} 
+        { loggedIn: false}; 
         
         setAuthInit({ loading: false, auth});
         

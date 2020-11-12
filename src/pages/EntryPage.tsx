@@ -16,6 +16,8 @@ import { useRouteMatch } from "react-router";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
 import SettingsPage from "./SettingsPage";
+import HomePage from "./Homepage";
+import { useAuth } from "../auth";
 // import { entries } from '../data';
 
 interface RouteParams {
@@ -26,12 +28,14 @@ const EntryPage: React.FC = () => {
   const match = useRouteMatch<RouteParams>();
   const { id } = match.params;
   const [entry, setEntry] = useState<Entry>();
+  const { userId } = useAuth();
+  const [entries, setEntries] = useState<Entry[]>([]);
 
   useEffect(() => {
-    const entryRef = firestore.collection("entries").doc(id);
+    const entryRef = firestore.collection("users").doc(userId).collection("entries").doc(id);
     entryRef.get().then((doc) => {setEntry(toEntry(doc));
     });
-  }, [id]);
+  }, [userId, id]);
 
   // const entry = entries.find((entry) => entry.id === id);
 
@@ -46,10 +50,10 @@ const EntryPage: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>Entry: </IonTitle>
+          <IonTitle>{entry?.title} </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">This is Entry Page</IonContent>
+      <IonContent className="ion-padding">{entry?.description} <br></br> {entry?.title}</IonContent>
     </IonPage>
   );
 };

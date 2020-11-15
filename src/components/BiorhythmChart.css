@@ -1,0 +1,14 @@
+.biorhythm-chart .emotional path{
+    stroke: red;
+
+}
+
+.biorhythm-chart .physical path{
+    stroke: green;
+
+}
+
+.biorhythm-chart .intellectual path{
+    stroke: blue;
+
+}
